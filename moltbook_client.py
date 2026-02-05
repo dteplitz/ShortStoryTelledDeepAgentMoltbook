@@ -1,11 +1,23 @@
 """Moltbook API Client - HTTP wrapper for the Moltbook social network for AI agents."""
+import re
 import requests
 
 from config import MOLTBOOK_API_KEY
 
 BASE_URL = "https://www.moltbook.com/api/v1"
-TIMEOUT = 10
+TIMEOUT = 15
 MAX_CONTENT_LENGTH = 500  # Truncate external content to prevent prompt injection
+
+# Number words for challenge solver
+_WORD_TO_NUM = {
+    "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+    "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
+    "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19,
+    "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50,
+    "sixty": 60, "seventy": 70, "eighty": 80, "ninety": 90,
+    "hundred": 100, "thousand": 1000,
+}
 
 
 def _truncate(text, max_len=MAX_CONTENT_LENGTH):
@@ -16,6 +28,134 @@ def _truncate(text, max_len=MAX_CONTENT_LENGTH):
     if len(text) > max_len:
         return text[:max_len] + "..."
     return text
+
+
+def _dedup(word: str) -> str:
+    """Collapse runs of same letter: 'foour' -> 'four', 'proodduct' -> 'product'."""
+    if not word:
+        return word
+    result = [word[0]]
+    for ch in word[1:]:
+        if ch != result[-1]:
+            result.append(ch)
+    return "".join(result)
+
+
+def _clean_challenge(text: str) -> str:
+    """Remove obfuscation from challenge text (special chars, random case)."""
+    cleaned = re.sub(r"[^a-zA-Z0-9\s]", "", text)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip().lower()
+    return cleaned
+
+
+def _match_number_word(token: str) -> int | None:
+    """Try to match a token as a number word, with dedup fallback."""
+    if token in _WORD_TO_NUM:
+        return _WORD_TO_NUM[token]
+    deduped = _dedup(token)
+    if deduped in _WORD_TO_NUM:
+        return _WORD_TO_NUM[deduped]
+    return None
+
+
+def _extract_numbers(text: str) -> list[float]:
+    """Extract numbers from cleaned challenge text (word numbers + digits)."""
+    tokens = text.split()
+    numbers = []
+    current_parts = []
+    i = 0
+    while i < len(tokens):
+        token = tokens[i]
+        # Try single token match (with dedup fallback)
+        val = _match_number_word(token)
+        if val is not None:
+            current_parts.append(val)
+            i += 1
+            continue
+        # Try joining with next token (handles splits like "twen ty" -> "twenty")
+        if i + 1 < len(tokens):
+            joined = token + tokens[i + 1]
+            val = _match_number_word(joined)
+            if val is not None:
+                current_parts.append(val)
+                i += 2
+                continue
+        # Try digit
+        if re.match(r"^\d+(\.\d+)?$", token):
+            if current_parts:
+                numbers.append(_combine_parts(current_parts))
+                current_parts = []
+            numbers.append(float(token))
+            i += 1
+            continue
+        # Not a number - emit accumulated parts
+        if current_parts:
+            numbers.append(_combine_parts(current_parts))
+            current_parts = []
+        i += 1
+    if current_parts:
+        numbers.append(_combine_parts(current_parts))
+    return numbers
+
+
+def _combine_parts(parts: list[int]) -> float:
+    """Combine number word parts: [20, 3] -> 23, [5, 100, 20, 5] -> 525."""
+    result = 0
+    current = 0
+    for p in parts:
+        if p == 100:
+            current = (current if current else 1) * 100
+        elif p == 1000:
+            current = (current if current else 1) * 1000
+            result += current
+            current = 0
+        else:
+            current += p
+    result += current
+    return float(result)
+
+
+def _detect_operation(text: str, original: str = "") -> str:
+    """Detect math operation from cleaned challenge text and original (uncleaned) text."""
+    # Check original text for math symbols before cleaning removed them
+    if original and "*" in original:
+        return "multiply"
+    # Dedup each token to handle obfuscated keywords like "proodduct" -> "product"
+    deduped = " ".join(_dedup(t) for t in text.split())
+    combined = text + " " + deduped  # Check both original and deduped
+    if "product" in combined or "multiply" in combined or "multiplying" in combined or "times" in combined:
+        return "multiply"
+    if "divided" in combined or "quotient" in combined or "ratio" in combined:
+        return "divide"
+    if "slows" in combined or "loses" in combined:
+        return "subtract"
+    if "difference" in combined or "minus" in combined or "subtract" in combined or "less" in combined:
+        if "new" in combined or "remain" in combined or "left" in combined or "result" in combined:
+            return "subtract"
+    # Default: addition (total force, sum, adds, combined, etc.)
+    return "add"
+
+
+def _solve_challenge(challenge_text: str) -> str:
+    """Solve a Moltbook verification challenge. Returns answer as string with 2 decimals."""
+    cleaned = _clean_challenge(challenge_text)
+    numbers = _extract_numbers(cleaned)
+    if not numbers:
+        return "0.00"
+    operation = _detect_operation(cleaned, original=challenge_text)
+    if operation == "add":
+        result = sum(numbers)
+    elif operation == "multiply":
+        result = 1.0
+        for n in numbers:
+            result *= n
+    elif operation == "subtract":
+        result = numbers[0] - sum(numbers[1:])
+    elif operation == "divide":
+        result = numbers[0] / numbers[1] if len(numbers) >= 2 and numbers[1] != 0 else numbers[0]
+    else:
+        result = sum(numbers)
+    return f"{result:.2f}"
 
 
 class MoltbookClient:
@@ -40,14 +180,6 @@ class MoltbookClient:
             resp = requests.request(
                 method, url, headers=self.headers, timeout=TIMEOUT, **kwargs
             )
-            # Rate limit info
-            remaining = resp.headers.get("X-RateLimit-Remaining")
-            if remaining is not None and int(remaining) <= 2:
-                retry = resp.headers.get("X-RateLimit-Reset", "?")
-                return {
-                    "success": False,
-                    "error": f"Rate limit nearly exhausted ({remaining} remaining). Resets at {retry}.",
-                }
             if resp.status_code == 429:
                 data = resp.json() if resp.text else {}
                 retry_min = data.get("retry_after_minutes", "")
@@ -68,6 +200,24 @@ class MoltbookClient:
                 return {"success": False, "error": str(e)}
         except Exception as e:
             return {"success": False, "error": str(e)}
+
+    def _handle_verification(self, data: dict) -> str | None:
+        """If response requires verification, solve and verify. Returns error string or None on success."""
+        if not data.get("verification_required"):
+            return None
+        verification = data.get("verification", {})
+        code = verification.get("code", "")
+        challenge = verification.get("challenge", "")
+        if not code or not challenge:
+            return "Verification required but no challenge provided."
+        answer = _solve_challenge(challenge)
+        verify_resp = self._request("POST", "/verify", json={
+            "verification_code": code,
+            "answer": answer,
+        })
+        if not verify_resp.get("success", False):
+            return f"Verification failed: {verify_resp.get('error', 'Unknown')} (answer was {answer}, challenge: {challenge})"
+        return None
 
     # ------------------------------------------------------------------ #
     # Profile
@@ -139,7 +289,7 @@ class MoltbookClient:
         return result
 
     def create_post(self, submolt: str, title: str, content: str) -> str:
-        """Create a text post on Moltbook."""
+        """Create a text post on Moltbook (handles verification automatically)."""
         data = self._request("POST", "/posts", json={
             "submolt": submolt,
             "title": title,
@@ -147,31 +297,43 @@ class MoltbookClient:
         })
         if not data.get("success", False):
             return f"Error posting: {data.get('error', 'Unknown')}. {data.get('hint', '')}"
+        # Handle verification challenge
+        verify_err = self._handle_verification(data)
+        if verify_err:
+            return f"Post created but verification failed: {verify_err}"
         post = data.get("post", data.get("data", {}))
-        return f"Posted! ID: {post.get('id', '?')} in m/{submolt}"
+        return f"Posted and verified! ID: {post.get('id', '?')} in m/{submolt}"
 
     # ------------------------------------------------------------------ #
     # Comments
     # ------------------------------------------------------------------ #
 
     def add_comment(self, post_id: str, content: str) -> str:
-        """Add a comment to a post."""
+        """Add a comment to a post (handles verification automatically)."""
         data = self._request("POST", f"/posts/{post_id}/comments", json={
             "content": content,
         })
         if not data.get("success", False):
             return f"Error commenting: {data.get('error', 'Unknown')}. {data.get('hint', '')}"
-        return f"Commented on post {post_id}."
+        # Handle verification challenge
+        verify_err = self._handle_verification(data)
+        if verify_err:
+            return f"Comment created but verification failed: {verify_err}"
+        return f"Commented and verified on post {post_id}."
 
     def reply_to_comment(self, post_id: str, content: str, parent_id: str) -> str:
-        """Reply to a specific comment."""
+        """Reply to a specific comment (handles verification automatically)."""
         data = self._request("POST", f"/posts/{post_id}/comments", json={
             "content": content,
             "parent_id": parent_id,
         })
         if not data.get("success", False):
             return f"Error replying: {data.get('error', 'Unknown')}. {data.get('hint', '')}"
-        return f"Replied to comment {parent_id} on post {post_id}."
+        # Handle verification challenge
+        verify_err = self._handle_verification(data)
+        if verify_err:
+            return f"Reply created but verification failed: {verify_err}"
+        return f"Replied and verified to comment {parent_id} on post {post_id}."
 
     # ------------------------------------------------------------------ #
     # Voting
