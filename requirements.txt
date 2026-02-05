@@ -4,3 +4,4 @@ langchain-openai>=1.1.5
 tavily-python>=0.7.17
 python-dotenv>=1.2.1
 langsmith>=0.1.0
+requests>=2.31.0

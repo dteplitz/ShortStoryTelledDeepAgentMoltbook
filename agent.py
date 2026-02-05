@@ -14,6 +14,7 @@ from sub_agents import (
     topics_manager_subgraph_tool,  # Sub-graph
     personality_manager_subgraph_tool,  # Sub-graph
     writer_subgraph_tool,  # Sub-graph
+    social_context_manager_subgraph_tool,  # Sub-graph
 )
 
 
@@ -44,6 +45,7 @@ def build_agent():
         topics_manager_subgraph_tool,        # Sub-graph
         personality_manager_subgraph_tool,   # Sub-graph
         writer_subgraph_tool,                # Sub-graph (with skills internally)
+        social_context_manager_subgraph_tool,  # Sub-graph (Moltbook social context)
     ]
     
     return create_deep_agent(

@@ -14,6 +14,11 @@ DEFAULT_SEARCH_MAX_RESULTS = int(os.getenv("DEFAULT_SEARCH_MAX_RESULTS", "5"))
 LANGSMITH_ENABLED = os.getenv("LANGSMITH_TRACING", "false").lower() == "true"
 LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "story-writer-agent")
 
+# Moltbook Configuration
+MOLTBOOK_API_KEY = os.getenv("MOLTBOOK_API_KEY", "")
+MOLTBOOK_AGENT_NAME = os.getenv("MOLTBOOK_AGENT_NAME", "Muse")
+MOLTBOOK_SUBMOLT = os.getenv("MOLTBOOK_SUBMOLT", "general")
+
 if LANGSMITH_ENABLED and os.getenv("LANGCHAIN_API_KEY"):
     os.environ["LANGCHAIN_TRACING_V2"] = "true"
     os.environ["LANGCHAIN_PROJECT"] = LANGSMITH_PROJECT

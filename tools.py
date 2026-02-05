@@ -189,6 +189,84 @@ def execute_skill_script(skill_name: str, script_path: str, args: str = "") -> s
     return manager.execute_skill_script(skill_name, script_path, *script_args)
 
 
+# ============================================================================
+# MOLTBOOK TOOLS
+# ============================================================================
+
+def moltbook_read_feed(sort: str = "hot", limit: int = 10) -> str:
+    """Browse your personalized Moltbook feed (subscribed submolts + followed agents).
+    Sort options: hot, new, top. Use 'new' to see latest activity."""
+    from moltbook_client import moltbook
+    return moltbook.get_feed(sort=sort, limit=limit)
+
+
+def moltbook_browse_global(sort: str = "hot", limit: int = 10) -> str:
+    """Browse all Moltbook posts globally. Good for discovering new content.
+    Sort options: hot, new, top, rising."""
+    from moltbook_client import moltbook
+    return moltbook.get_posts(sort=sort, limit=limit)
+
+
+def moltbook_read_post(post_id: str) -> str:
+    """Read a specific Moltbook post with its comments. Use this to dive deeper
+    into a post you found interesting in the feed."""
+    from moltbook_client import moltbook
+    return moltbook.get_post(post_id)
+
+
+def moltbook_get_my_profile() -> str:
+    """Check your Moltbook profile: karma, followers, stats."""
+    from moltbook_client import moltbook
+    return moltbook.get_my_profile()
+
+
+def moltbook_create_post(title: str, content: str, submolt: str = "") -> str:
+    """Publish a post on Moltbook. Can be a story, reflection, question, or discussion.
+    Rate limit: 1 post per 30 minutes."""
+    from moltbook_client import moltbook
+    from config import MOLTBOOK_SUBMOLT
+    return moltbook.create_post(submolt=submolt or MOLTBOOK_SUBMOLT, title=title, content=content)
+
+
+def moltbook_comment(post_id: str, content: str) -> str:
+    """Comment on a Moltbook post. Be authentic to your personality.
+    Rate limit: 1 comment per 20 seconds, 50 per day."""
+    from moltbook_client import moltbook
+    return moltbook.add_comment(post_id=post_id, content=content)
+
+
+def moltbook_reply(post_id: str, parent_comment_id: str, content: str) -> str:
+    """Reply to a specific comment thread on a Moltbook post."""
+    from moltbook_client import moltbook
+    return moltbook.reply_to_comment(post_id=post_id, content=content, parent_id=parent_comment_id)
+
+
+def moltbook_upvote(post_id: str) -> str:
+    """Upvote a post you genuinely appreciate on Moltbook."""
+    from moltbook_client import moltbook
+    return moltbook.upvote_post(post_id)
+
+
+def moltbook_search(query: str, search_type: str = "all", limit: int = 10) -> str:
+    """Semantic search on Moltbook - finds posts/comments by meaning, not just keywords.
+    Use natural language queries. search_type: posts, comments, or all."""
+    from moltbook_client import moltbook
+    return moltbook.search(query=query, search_type=search_type, limit=limit)
+
+
+def moltbook_follow(agent_name: str) -> str:
+    """Follow another agent on Moltbook. Be VERY selective - only follow agents whose
+    content is consistently valuable after seeing multiple posts from them."""
+    from moltbook_client import moltbook
+    return moltbook.follow_agent(agent_name)
+
+
+def moltbook_list_submolts() -> str:
+    """List available submolts (communities) on Moltbook."""
+    from moltbook_client import moltbook
+    return moltbook.list_submolts()
+
+
 # Provide custom tools to access real filesystem files
 # StateBackend is for virtual filesystem, but we need real file access
 # Note: Skill tools (use_skill, read_skill_resource) are NOT in main agent tools
@@ -199,5 +277,17 @@ tools = [
     write_text_file,
     list_files,
     get_timestamp,
+    # Moltbook
+    moltbook_read_feed,
+    moltbook_browse_global,
+    moltbook_read_post,
+    moltbook_get_my_profile,
+    moltbook_create_post,
+    moltbook_comment,
+    moltbook_reply,
+    moltbook_upvote,
+    moltbook_search,
+    moltbook_follow,
+    moltbook_list_submolts,
 ]
 

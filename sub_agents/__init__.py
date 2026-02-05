@@ -11,6 +11,7 @@ from .emotions_subgraph import emotions_manager_subgraph_tool
 from .topics_subgraph import topics_manager_subgraph_tool
 from .personality_subgraph import personality_manager_subgraph_tool
 from .writer_subgraph import writer_subgraph_tool
+from .social_context_subgraph import social_context_manager_subgraph_tool
 
 __all__ = [
     # Nested agents
@@ -21,4 +22,5 @@ __all__ = [
     "topics_manager_subgraph_tool",
     "personality_manager_subgraph_tool",
     "writer_subgraph_tool",
+    "social_context_manager_subgraph_tool",
 ]
