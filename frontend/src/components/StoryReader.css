@@ -1,0 +1,218 @@
+.story-reader-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 110;
+  animation: fadeIn 0.3s ease;
+}
+
+.story-reader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 600px;
+  max-width: 90vw;
+  background: rgba(15, 20, 40, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.5);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s ease;
+  border-left: 1px solid rgba(102, 126, 234, 0.3);
+  position: relative;
+}
+
+/* New story special styling */
+.story-reader.new-story {
+  border-left: 2px solid #a78bfa;
+  box-shadow: -4px 0 40px rgba(167, 139, 250, 0.6), 0 0 100px rgba(167, 139, 250, 0.2);
+  animation: slideInRight 0.5s ease, glow 2s ease-in-out;
+}
+
+.new-story-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  z-index: 10;
+  animation: pulse 2s ease-in-out infinite, slideDown 0.5s ease;
+  box-shadow: 0 4px 15px rgba(167, 139, 250, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: -4px 0 30px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: -4px 0 50px rgba(167, 139, 250, 0.8), 0 0 120px rgba(167, 139, 250, 0.3);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reader-header {
+  padding: 2rem;
+  padding-top: 4rem;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(167, 139, 250, 0.2) 100%);
+}
+
+.reader-title-section {
+  flex: 1;
+}
+
+.reader-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  line-height: 1.3;
+}
+
+.reader-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.close-button {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #ef4444;
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.close-button:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.1);
+}
+
+.reader-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.reader-content p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #d1d5db;
+  text-align: justify;
+}
+
+.reader-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom scrollbar for reader */
+.reader-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reader-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.reader-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  border-radius: 10px;
+}
+
+.reader-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #a78bfa 0%, #667eea 100%);
+}
+
+@media (max-width: 768px) {
+  .story-reader {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .reader-header {
+    padding: 1.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .reader-title {
+    font-size: 1.5rem;
+  }
+
+  .reader-content {
+    padding: 1.5rem;
+  }
+
+  .reader-content p {
+    font-size: 1rem;
+  }
+
+  .new-story-badge {
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

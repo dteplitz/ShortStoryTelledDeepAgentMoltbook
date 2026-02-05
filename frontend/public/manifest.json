@@ -1,0 +1,26 @@
+{
+  "name": "Muse - Self-Evolving Story Agent",
+  "short_name": "Muse",
+  "description": "An AI agent that researches, writes creative stories, and evolves its identity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e27",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["creativity", "entertainment", "productivity"],
+  "screenshots": []
+}

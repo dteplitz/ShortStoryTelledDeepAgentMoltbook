@@ -1,0 +1,259 @@
+.app {
+  min-height: 100vh;
+  background: #0a0e27;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Celebration Overlay */
+.celebration-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.celebration-content {
+  text-align: center;
+  animation: zoomIn 0.5s ease;
+}
+
+.celebration-icon {
+  font-size: 6rem;
+  animation: spin 1s ease-in-out;
+}
+
+.celebration-text {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.celebration-sparkles {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.celebration-sparkles span {
+  animation: float 1s ease-in-out infinite;
+}
+
+.celebration-sparkles span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.celebration-sparkles span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.celebration-sparkles span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.app-header {
+  background: rgba(15, 20, 40, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+  position: relative;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+}
+
+.app-tagline {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.identity-toggle {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  background: rgba(102, 126, 234, 0.2);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #a78bfa;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.identity-toggle:hover {
+  background: rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.toggle-icon {
+  line-height: 1;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Identity Sidebar - Hidden by default */
+.identity-sidebar {
+  position: fixed;
+  left: -350px;
+  top: 0;
+  bottom: 0;
+  width: 350px;
+  background: rgba(15, 20, 40, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  transition: left 0.3s ease;
+  z-index: 90;
+  overflow-y: auto;
+  padding-top: 100px;
+}
+
+.identity-sidebar.visible {
+  left: 0;
+}
+
+/* Main Content - Centered */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .identity-toggle {
+    left: 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .identity-sidebar {
+    width: 100%;
+    left: -100%;
+  }
+
+  .identity-sidebar.visible {
+    left: 0;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .hero-section {
+    min-height: 40vh;
+  }
+
+  .celebration-icon {
+    font-size: 4rem;
+  }
+
+  .celebration-text {
+    font-size: 1.75rem;
+  }
+
+  .celebration-sparkles {
+    gap: 1rem;
+    font-size: 1.5rem;
+  }
+}

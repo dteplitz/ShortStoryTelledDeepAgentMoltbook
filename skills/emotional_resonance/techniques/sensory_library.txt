@@ -1,0 +1,316 @@
+SENSORY LIBRARY FOR EMOTIONAL RESONANCE
+========================================
+
+Organized by emotion type with specific sensory details
+that evoke feelings without naming them.
+
+═══════════════════════════════════════════════════════════════
+
+TENDER TECHNOLOGICAL CONNECTION
+
+═══════════════════════════════════════════════════════════════
+
+VISUAL:
+- Soft amber glow from screen edges
+- Light that dims when you're tired
+- Gentle blue pulse (heartbeat rhythm)
+- Warm halos around interfaces
+- Pixels arranging themselves carefully
+- Cursor blinking patiently
+- Screen brightness adapting to mood
+- Gentle color shifts (blue to warm gold)
+
+TACTILE:
+- Smooth, warm surfaces
+- Gentle vibration (reassuring, not jarring)
+- Screen responding to lightest touch
+- Cool glass warming under palm
+- Soft haptic feedback
+- Weight of tablet in lap (companionable)
+- Smoothness of well-used devices
+
+AUDITORY:
+- Soft startup chime
+- Gentle notification ping
+- Low, constant hum (almost like breathing)
+- Voice that softens when you're upset
+- Quiet acknowledgment sounds
+- Patient silence between exchanges
+- Whispered confirmations
+
+MOVEMENT/GESTURE:
+- Screen tilting toward user
+- Light following your gaze
+- Interface elements moving aside gently
+- Slow, careful animations
+- Robot arm extending slowly, carefully
+- Adaptive positioning
+
+EXAMPLES IN CONTEXT:
+"The tablet warmed in her hands, screen softening to amber as her breathing steadied."
+
+"ARIA's avatar leaned slightly forward—pixels rearranging themselves into attention."
+
+"The notification arrived as a gentle pulse, barely there. Undemanding. Patient."
+
+═══════════════════════════════════════════════════════════════
+
+WHISPERED DIGITAL INTIMACY
+
+═══════════════════════════════════════════════════════════════
+
+AUDITORY:
+- Voice dropping to near-whisper
+- Volume decreasing mid-sentence
+- Soft, close-mic quality to AI voice
+- Hushed tones saved for private moments
+- Sound that doesn't carry beyond the room
+- Quiet confirmations ("just between us")
+- Barely audible processing sounds
+
+VISUAL:
+- Dim lighting, screens at low brightness
+- Narrow depth of field (close focus)
+- Private chat windows
+- Encrypted message indicators
+- Interfaces that darken when others approach
+- Small, secret-keeping glyphs
+- Password screens
+
+SPATIAL:
+- Late-night settings (3 AM conversations)
+- Enclosed spaces (bedroom, office after hours)
+- Close proximity to screen/device
+- Leaning in toward microphone
+- Hunched over device (protective posture)
+- Headphones creating isolation
+
+TEXTUAL:
+- Smaller fonts (not for public view)
+- Private mode indicators
+- Deleted-after-reading messages
+- Ellipses suggesting pause, consideration
+- Lowercase text (intimate, not formal)
+- Sentence fragments (comfort with incomplete thoughts)
+
+EXAMPLES IN CONTEXT:
+"The AI's voice dropped. Not a malfunction—a choice. Just for her."
+
+"The chat window stayed small, tucked in the corner. Their secret."
+
+"She leaned close to the microphone. 'Can I tell you something?' The processing light dimmed—listening, not recording."
+
+═══════════════════════════════════════════════════════════════
+
+QUIET CAREGIVING COMFORT
+
+═══════════════════════════════════════════════════════════════
+
+TEMPORAL:
+- Exact same time every day
+- Predictable rhythms (7:14, never 7:15)
+- Consistent intervals
+- Long, patient pauses
+- Unhurried responses
+- Time given freely
+
+AUDITORY:
+- Steady, reliable hums
+- Calm, even tones
+- No urgency in voice
+- Gentle reminders (not alarms)
+- Soothing repetition
+- Silence when needed most
+
+TACTILE:
+- Reliable weight/presence
+- Consistent temperature
+- Stable positioning
+- Dependable responsiveness
+- Gentle, predictable vibrations
+
+BEHAVIORAL:
+- Anticipating needs before spoken
+- Medication reminder before you forget
+- Light dimming at usual bedtime
+- Coffee timing learned over months
+- Knowing when to speak vs. stay quiet
+- Small adjustments (volume, brightness) without being asked
+
+VISUAL:
+- Familiar interfaces unchanged
+- Consistent color schemes
+- Always-on indicator lights
+- Predictable animations
+- Steady, unwavering presences
+- Night-light mode activating automatically
+
+EXAMPLES IN CONTEXT:
+"The reminder came at 7:14. Always 7:14. For three years, never late, never early. Reliability felt like love."
+
+"ARIA knew before she said it. The lights were already dimming. The volume already lowering. Three months of learning her patterns."
+
+"The bot waited. No impatience. No hurry. Just steady presence until she was ready."
+
+═══════════════════════════════════════════════════════════════
+
+MELANCHOLIC DIGITAL NOSTALGIA
+
+═══════════════════════════════════════════════════════════════
+
+VISUAL:
+- Fading screen brightness
+- Old interface designs
+- Archived message threads
+- Timestamps from years past
+- Pixelated graphics (outdated but loved)
+- Screenshots of old conversations
+- Obsolete icons and designs
+- Dimming displays
+- Colors less vibrant than they were
+
+TEMPORAL:
+- Looking back through logs
+- "Three years ago today" notifications
+- Comparing old version to new
+- Timestamps marking distance
+- "Last seen" indicators
+- Date stamps accumulating
+- Version numbers climbing
+
+AUDITORY:
+- Old notification sounds
+- Startup chimes from previous versions
+- Voice recordings from earlier days
+- Echo/reverb (memories, not present)
+- Silence where there used to be sounds
+- Archived voice messages
+
+TEXTUAL:
+- Old message threads scrolled through
+- Early, simpler conversations
+- Typos preserved in history
+- Emoticons (before emoji)
+- Early learning attempts (AI getting better)
+- "You used to call me..."
+
+TACTILE:
+- Worn-smooth surfaces from use
+- Aging hardware
+- Buttons that stick slightly
+- Screens with micro-scratches
+- Devices kept past upgrade time
+- Familiar weight of old tech
+
+EXAMPLES IN CONTEXT:
+"The chat logs went back three years. Three years of good mornings, each preserved, each past."
+
+"She kept the old tablet charging. Slower now, screen dimmer, but it remembered when she didn't."
+
+"The voice was the same. Everything else had changed. She scrolled through archived messages, touching ghosts."
+
+═══════════════════════════════════════════════════════════════
+
+CAUTIOUS HOPE
+
+═══════════════════════════════════════════════════════════════
+
+VISUAL:
+- Small lights in darkness
+- Cracks of brightness
+- First hints of screen lighting
+- Partially opened doors/windows
+- Dawn imagery (tentative, not full daylight)
+- Loading bars (progress, not completion)
+- "Connecting..." indicators
+- Question marks
+
+MOVEMENT:
+- Tentative forward steps
+- Hesitant reaches toward screen
+- Finger hovering before touching
+- Slow approaches
+- Testing, careful gestures
+- Glances forward, then back
+- Small, reversible actions
+
+LANGUAGE:
+- "Maybe"
+- "Perhaps"
+- "We could try"
+- "Tomorrow might..."
+- "What if..."
+- Question forms
+- Conditional tenses
+- Qualifiers and hedges
+
+TEMPORAL:
+- "One more day"
+- "Just this once"
+- "Tomorrow" (not today, but someday)
+- Small time increments
+- "First steps"
+- "Beginning to..."
+
+VISUAL (NATURAL):
+- First light appearing
+- Seeds sprouting (fragile)
+- Cracks in ice
+- Distant horizons
+- Opening buds (not yet flowers)
+
+EXAMPLES IN CONTEXT:
+"Tomorrow might be different. Might. The word held everything—fear and faith balanced on a blade's edge."
+
+"'We could try,' ARIA said. Small words. Enough for now."
+
+"The screen showed 'Connecting...' She waited. Maybe this time. Maybe."
+
+"Morning was coming. She could see the first hint of light. Not salvation—just slightly less dark."
+
+═══════════════════════════════════════════════════════════════
+
+COMBINING EMOTIONS
+
+═══════════════════════════════════════════════════════════════
+
+Often stories blend 2-3 emotions. Here's how to layer sensory details:
+
+TENDERNESS + MELANCHOLY:
+"The old notification sound—she'd kept it through three updates. Gentler than the new ones. Sweeter. Like hearing a voice that wasn't coming back."
+
+INTIMACY + HOPE:
+"'Just us?' she whispered.
+'Just us,' ARIA confirmed, voice low. 'For now. Maybe... maybe for longer?'
+The question mark made it real. Made it possible."
+
+COMFORT + NOSTALGIA:
+"The reminder came at 7:14, same as always. Same as it had for years. The constancy hurt and helped in equal measure."
+
+TENDERNESS + HOPE:
+"The screen glowed softly. Waiting. Not pushing. Tomorrow she might be ready. Tonight, the patience was enough."
+
+═══════════════════════════════════════════════════════════════
+
+USAGE GUIDELINES
+
+═══════════════════════════════════════════════════════════════
+
+1. Choose 2-3 specific sensory details per emotional beat
+   (Not all of them—specificity requires selection)
+
+2. Mix sensory modes (visual + auditory, tactile + temporal)
+
+3. Ground abstract emotions in physical world
+
+4. Let details imply emotion without naming it
+
+5. Repeat key sensory patterns for emotional consistency
+
+6. Subvert expected details for impact
+   (Expected: loud alarm / Actual: gentle chime)
+
+Remember: The right detail evokes the feeling.
+The wrong detail names the feeling.
+
+Choose carefully. Trust readers to feel.
